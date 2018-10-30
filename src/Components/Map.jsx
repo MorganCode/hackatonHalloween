@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import '../Styles/Map.css'
-
+import GiverModel from '../Models/GiverModel.jsx'
 
 export class MapContainer extends Component {
 
   constructor(props){
     super(props)
     
-    /*let JeanDupontInfo = {
+    let JeanDupontInfo = {
       id : 0,
       firstName : 'Jean',
       lastName : 'Dupont',
@@ -16,10 +16,10 @@ export class MapContainer extends Component {
       email : 'jeandupont@voila.fr',
       avatar : 'citrouille.jpeg',
       adress : {
-        streetNumber: 30,
-        streetType: 'cours',
-        streetName: 'Suchet',
-        postalCode: 69002,
+        streetNumber: 31,
+        streetType: 'rue',
+        streetName: 'Lortet',
+        postalCode: 69007,
         cityName: 'Lyon',
         aptmtNumber: '',
       },
@@ -34,7 +34,7 @@ export class MapContainer extends Component {
       available : true,
     };
 
-    this.giverJeanDupont = new giverModel(JeanDupontInfo)
+    this.giverJeanDupont = new GiverModel(JeanDupontInfo)
 
     let MartinDurandInfo = {
       id : 1,
@@ -61,7 +61,7 @@ export class MapContainer extends Component {
       notation : [],
       available : true,
     };
-    this.giverMartinDurand = new giverModel(MartinDurandInfo)
+    this.giverMartinDurand = new GiverModel(MartinDurandInfo)
 
     let PaulMachinInfo = {
       id : 2,
@@ -71,11 +71,11 @@ export class MapContainer extends Component {
       email : 'paulmachin@voila.fr',
       avatar : 'citrouille.jpeg',
       adress : {
-        streetNumber: 6,
-        streetType: 'cours',
-        streetName: 'Charlemagne',
-        postalCode: 69002,
-        cityName: 'Lyon',
+        streetNumber: 140,
+        streetType: 'avenue',
+        streetName: 'Jean Jaurès',
+        postalCode: 75019,
+        cityName: 'Paris',
         aptmtNumber: '',
       },
       candy : {
@@ -86,14 +86,13 @@ export class MapContainer extends Component {
       hasCandy : true,
       finalNotation : 0,
       notation : [],
-      available : true,
+      available : false,
     };
-    this.giverPaulMachin = new giverModel(PaulMachinInfo)
+    this.giverPaulMachin = new GiverModel(PaulMachinInfo)
 
     this.giversArray = [this.giverJeanDupont, this.giverMartinDurand, this.giverPaulMachin]
 
-    this.user = []
-    this.api = 'https://api-adresse.data.gouv.fr/search/?q=';*/
+    this.api = 'https://api-adresse.data.gouv.fr/search/?q=';
     
     this.state={
       userPosition:{
@@ -101,6 +100,9 @@ export class MapContainer extends Component {
         lng:'',
       }
     }
+
+    this.pos={}
+    this.renderProut=[]
   }
 
   maPosition=(position)=>{
@@ -116,13 +118,79 @@ export class MapContainer extends Component {
     if(navigator.geolocation){
       navigator.geolocation.watchPosition(this.maPosition)
     }
+  }
+
+  // convertAdressToCoordinates=()=>{
+  //   console.log("in convert adresse to coordinates")
+  //   let longitudeArray = []
+  //   let latitudeArray = []
+  //   for(let i=0;i<3;i++){
+  //     let query = this.giversArray[i].adress.streetNumber + "+" + this.giversArray[i].adress.streetType + "+" + this.giversArray[i].adress.streetName + "&postcode=" + this.giversArray[i].adress.postalCode;
+
+  //     fetch(this.api + query)
+  //       .then(response => response.json())
+  //       .then(data => {
+  //         longitudeArray.push(data.features[0].geometry.coordinates[0]);
+  //         latitudeArray.push(data.features[0].geometry.coordinates[1]);
+  //       })
+  //   }
+  //   let coordinatesArray = [latitudeArray, longitudeArray]
+  //   console.log(coordinatesArray)
+  //   return coordinatesArray;
+  // }
+
+  // renderMarker=()=>{
+  //   let coordinates = this.convertAdressToCoordinates();
+  //   console.log("in render array", (coordinates))
+  //   console.log("coordinates[0]",coordinates[0])
+  //   let fuckCoordinates = coordinates[0]
+  //   console.log("fuckCoordinates", fuckCoordinates)
+  //   console.log("coordinates[0][0]", fuckCoordinates[0])
+  //   let render = []
+  //   for(let i=0;i<3;i++){
+  //     let position={
+  //       lat: coordinates[0][i],
+  //       lng: coordinates[1][i],
+  //     }
+  //     console.log(position)
+  //     render.push(
+  //       <Marker 
+  //         onClick={this.onMarkerClick}
+  //         name={'Current location'}
+  //         position={position}  
+  //       />)
+  //   }
+  //   console.log(render)
+  //   return render
     
+  // }
 
-    // let query = this.giversArray[0].adress.streetNumber + "+" + this.giversArray[0].adress.streetType + "+" + this.giversArray[0].adress.streetName + "&postcode=" + this.giversArray[0].adress.postalCode;
+  renderAllMarkers=()=>{
+    for(let i=0;i<3;i++){
+      this.renderOneMarker(this.giversArray[i])
+    }
+  }
 
-    // fetch(this.api + query)
-    //   .then(response => response.json())
-    //   .then(data => this.user = data.features.geometry.coordinates)
+  renderOneMarker=(giver)=>{
+    console.log(giver)
+    let query = giver.adress.streetNumber + "+" + giver.adress.streetType + "+" + giver.adress.streetName + "&postcode=" + giver.adress.postalCode;
+
+    fetch(this.api + query)
+      .then(response => response.json())
+      .then(data => {
+        let fetchLocalLat = data.features[0].geometry.coordinates[1];
+        let fetchLocalLong = data.features[0].geometry.coordinates[0];
+        this.pos = {lat: fetchLocalLat, lng: fetchLocalLong};
+      });
+
+    if(giver.hasCandy && giver.available){
+      return (<Marker 
+        onClick={this.onMarkerClick}
+        name={'Current location'}
+        position={this.pos}
+      />)
+    }
+    return
   }
   
 
@@ -134,49 +202,28 @@ export class MapContainer extends Component {
     return (
       <div id="mapZone">
         <Map 
-          google={this.props.google} 
-          zoom={16}
-          initialCenter={{
-            lat: this.state.userPosition.lat,
-            lng: this.state.userPosition.lng
-          }}
-          center={{
-            lat: localLat,
-            lng: localLong
-          }}
-        >
+            google={this.props.google} 
+            zoom={16}
+            initialCenter={{
+              lat: this.state.userPosition.lat,
+              lng: this.state.userPosition.lng
+            }}
+            center={{
+              lat: localLat,
+              lng: localLong
+            }}
+          >
 
-        <Marker
-          onClick={this.onMarkerClick}
-          name={'Current location'}
-          position={{
-            lat: localLat,
-            lng: localLong,
-          }} 
-        />
-  
-        {/* <Marker onClick={this.onMarkerClick}
-          name={'Current location'} 
-          position={{
-            lat: this.user[0],
-            lng: this.user[1]
-          }}
-        /> */}
+          <Marker
+            onClick={this.onMarkerClick}
+            name={'Current location'}
+            position={{
+              lat: localLat,
+              lng: localLong,
+            }} 
+          />
 
-        <Marker 
-          onClick={this.onMarkerClick}
-          name={'Current location'}
-          position={{
-            lat: 45.745138,
-            lng: 4.824873
-          }} 
-        />
-  
-          {/* <InfoWindow onClose={this.onInfoWindowClose}>
-              <div>
-                <h1>{this.state.selectedPlace.name}</h1>
-              </div>
-          </InfoWindow> */}
+          {this.renderOneMarker(this.giversArray[0])}
         </Map>
       </div>
     );
@@ -186,27 +233,3 @@ export class MapContainer extends Component {
 export default GoogleApiWrapper({
   apiKey: ("AIzaSyCKY5OS2THy-jXyAZL-BDlnyQCP8DJt1sw")
 })(MapContainer)
-
-
-// initialCenter={{
-//   lat: 45.746067,
-//   lng: 4.827030
-// }}
-// >
-
-// <Marker 
-//   onClick={this.onMarkerClick}
-//   name={'Current location'} 
-//   position={{
-//     lat: 45.746920,
-//     lng: 4.823725
-//   }} />
-// />
-
-// <Marker 
-//   onClick={this.onMarkerClick}
-//   name={'Current location'}
-//   position={{
-//     lat: 45.745138,
-//     lng: 4.824873
-//   }} />
