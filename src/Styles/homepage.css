@@ -1,0 +1,11 @@
+.homepage {
+  width: 80%;
+  margin: auto;
+}
+
+.btn {
+  background-color: rgba(190, 99, 24, 0.8);
+  border-radius: 10px;
+  padding: 5px;
+  color: black;
+}

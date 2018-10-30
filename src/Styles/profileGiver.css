@@ -1,0 +1,72 @@
+/* ----------profileGiver.css----------*/
+
+
+
+/*-------- General Container -------*/
+
+.profileGiver{
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: row;
+}
+
+/*-------- Avatar Profile -------*/
+
+img{
+  height: 30%;
+  width: 30%;
+}
+
+/*-------- Coordinated Profile -------*/
+
+.coordinated{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-top: 6vh;
+  
+}
+
+.adress{
+ 
+  font-size: 10px;
+}
+.name{
+font-size: 15px;
+margin-top: 4vh;
+}
+
+/*-------- General Button Profile -------*/
+
+.buttonActionProfile{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  margin-left: -36vw;
+  }
+
+/*--------  Button Changed Profile -------*/
+.buttonChangeProfileInformation{
+  width: 80px;
+  height: 40px;
+  background-color: darkgrey;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 10px;
+}
+.buttonChangeProfileInformation:focus{
+  outline: none;
+  }
+/*--------  Button Available -------*/
+ 
+  .showAvailable{
+    margin-top:2vh;
+    margin-right: 8vw;
+    margin-left: 4vw;
+    font-size: 11px;
+    font-weight: bold;
+  }
+  .availableButton{
+    margin-top:1vh;
+  }
