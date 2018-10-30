@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Bonbondex from '../Components/Bonbondex.jsx';
 import MapContainer from '../Components/Map';
 
 class Receiver extends Component {
@@ -6,6 +7,7 @@ class Receiver extends Component {
     return (
       <div>
         <MapContainer /> 
+        <Bonbondex />
       </div>
     );
   }
