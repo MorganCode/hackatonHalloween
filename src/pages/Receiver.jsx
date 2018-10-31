@@ -6,8 +6,12 @@ class Receiver extends Component {
   render() {
     return (
       <div>
-        <MapContainer /> 
-        <Bonbondex />
+        <MapContainer 
+          giversArray={this.props.giversArray}
+        /> 
+        <Bonbondex 
+          giversArray={this.props.giversArray}
+        />
       </div>
     );
   }

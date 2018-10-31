@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import '../Styles/Map.css'
 import GiverModel from '../Models/GiverModel.jsx'
-import Croco from "../Assets/croco.jpg"
+import Crocodile from "../Assets/croco.jpg"
 import BonObon from "../Assets/bonObon.jpg"
 import Dragibus from "../Assets/citrouille.jpeg"
 import Schtroumpfs from "../Assets/schtroumpfs.jpg"
@@ -13,91 +13,7 @@ export class MapContainer extends Component {
 
   constructor(props) {
     super(props)
-
-    let JeanDupontInfo = {
-      id: 0,
-      firstName: 'Jean',
-      lastName: 'Dupont',
-      password: 'JeanDupont',
-      email: 'jeandupont@voila.fr',
-      avatar: 'citrouille.jpeg',
-      adress: {
-        streetNumber: 31,
-        streetType: 'rue',
-        streetName: 'Lortet',
-        postalCode: 69007,
-        cityName: 'Lyon',
-        aptmtNumber: '',
-      },
-      candy: {
-        crocodile: true,
-        coca: false,
-        dragibus: false,
-      },
-      hasCandy: true,
-      finalNotation: 0,
-      notation: [],
-      available: true,
-    };
-
-    this.giverJeanDupont = new GiverModel(JeanDupontInfo)
-
-    let MartinDurandInfo = {
-      id: 1,
-      firstName: 'Martin',
-      lastName: 'Durand',
-      password: 'MartinDurand',
-      email: 'martindurand@voila.fr',
-      avatar: 'citrouille.jpeg',
-      adress: {
-        streetNumber: 20,
-        streetType: 'rue',
-        streetName: 'Delandine',
-        postalCode: 69002,
-        cityName: 'Lyon',
-        aptmtNumber: '',
-      },
-      candy: {
-        crocodile: false,
-        coca: false,
-        dragibus: false,
-      },
-      hasCandy: false,
-      finalNotation: 0,
-      notation: [],
-      available: true,
-    };
-    this.giverMartinDurand = new GiverModel(MartinDurandInfo)
-
-    let PaulMachinInfo = {
-      id: 2,
-      firstName: 'Paul',
-      lastName: 'Machin',
-      password: 'PaulMachin',
-      email: 'paulmachin@voila.fr',
-      avatar: 'citrouille.jpeg',
-      adress: {
-        streetNumber: 140,
-        streetType: 'avenue',
-        streetName: 'Jean Jaurès',
-        postalCode: 75019,
-        cityName: 'Paris',
-        aptmtNumber: '',
-      },
-      candy: {
-        crocodile: true,
-        coca: true,
-        dragibus: false,
-      },
-      hasCandy: true,
-      finalNotation: 0,
-      notation: [],
-      available: false,
-    };
-    this.giverPaulMachin = new GiverModel(PaulMachinInfo)
-
-    this.giversArray = [this.giverJeanDupont, this.giverMartinDurand, this.giverPaulMachin]
-
+    
     this.api = 'https://api-adresse.data.gouv.fr/search/?q=';
 
     this.state = {
@@ -174,14 +90,19 @@ export class MapContainer extends Component {
 
   // }
 
-  renderAllMarkers = () => {
-    for (let i = 0; i < 3; i++) {
-      this.renderOneMarker(this.giversArray[i])
+  renderAllMarkers=()=>{
+    let renderArray = []
+    for(let i=0;i<3;i++){
+      renderArray.push(this.renderOneMarker(this.props.giversArray[i]))
+      // renderArray.push(this.renderOneMarker(this.props.giversArray[i]))
     }
+    console.log(renderArray)
+    return renderArray;
+    // return renderArray;
   }
 
-  renderOneMarker = (giver) => {
-    console.log(giver)
+  renderOneMarker=(giver)=>{
+    // console.log(giver)
     let query = giver.adress.streetNumber + "+" + giver.adress.streetType + "+" + giver.adress.streetName + "&postcode=" + giver.adress.postalCode;
 
     fetch(this.api + query)
@@ -189,7 +110,9 @@ export class MapContainer extends Component {
       .then(data => {
         let fetchLocalLat = data.features[0].geometry.coordinates[1];
         let fetchLocalLong = data.features[0].geometry.coordinates[0];
-        this.pos = { lat: fetchLocalLat, lng: fetchLocalLong };
+        this.pos = {lat: fetchLocalLat, lng: fetchLocalLong};
+        console.log(this.pos)
+        // return this.pos
       });
 
     if (giver.hasCandy && giver.available) {
@@ -228,7 +151,7 @@ export class MapContainer extends Component {
   displayBonbon = (giver) => {
     if (giver) {
       if (giver.candy.coca) return <img src={BonObon}></img>
-      if (giver.candy.crocodile) return <img src={Croco}></img>
+      if (giver.candy.crocodile) return <img src={Crocodile}></img>
       if (giver.candy.dragibus) return <img src={Dragibus}></img>
       if (giver.candy.schtroumpfs) return <img src={Schtroumpfs}></img>
       if (giver.candy.sucette) return <img src={Sucette}></img>
@@ -265,7 +188,14 @@ export class MapContainer extends Component {
             }}
           />
 
-          {this.renderOneMarker(this.giversArray[0])}
+          {/* {this.renderAllMarkers().map((position, index) => (<Marker 
+            onClick={this.onMarkerClick}
+            name={'Current location'}
+            position={position}
+            key={index}
+          />))} */}
+          {this.renderOneMarker(this.props.giversArray[0])}
+          {/* {this.renderOneMarker(this.giversArray[0])} */}
 
           <InfoWindow
             marker={this.state.activeMarker}
