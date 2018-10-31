@@ -103,6 +103,11 @@ class App extends Component {
     this.userStatus = status;
   }
 
+  setNotation = (giver, note) => {
+    giver.notation.push(note)
+    giver.finalNotation = giver.notation.reduce((a, b) => a + b)
+  }
+
   render() {
 
 
@@ -120,6 +125,7 @@ class App extends Component {
                     ()=><Receiver 
                           giversArray={this.giversArray}
                           userStatus = {this.userStatus}
+                          setNotation={this.setNotation}
                         />
                   } 
                 />
