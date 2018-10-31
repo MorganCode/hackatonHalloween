@@ -6,10 +6,12 @@ import Login from '../Components/Login'
 
 class Giver extends Component {
   constructor(props){
+    
     super(props)
     this.state={
       loggedUser:false,
     }
+    console.log("in giver constructor", this.props.giversArray)
   }
 
   setLoggedUser=(bool)=>{
@@ -19,6 +21,7 @@ class Giver extends Component {
   }
 
   render() {
+    console.log("in giver render", this.props.giversArray)
     return (
       <div>
         <div>{

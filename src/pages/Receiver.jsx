@@ -5,54 +5,56 @@ import '../Styles/receiver.css';
 import Login from '../Components/Login';
 
 class Receiver extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.state={
-      loggedUser:false,
-      giverCoordinates:[],
-      receiverCoordinates:{}
+    this.state = {
+      loggedUser: false,
+      giverCoordinates: [],
+      receiverCoordinates: {}
     }
   }
 
-  setLoggedUser=()=>{
+  setLoggedUser = (bool) => {
     this.setState({
-      loggedUser: true,
+      loggedUser: bool,
     })
   }
 
-  setCoordinates=(coord)=>{
+  setCoordinates = (coord) => {
     this.setState({
-      giverCoordinates:coord
+      giverCoordinates: coord
     })
   }
 
-  setUserCoordinates=(userCoord)=>{
+  setUserCoordinates = (userCoord) => {
     this.setState({
-      receiverCoordinates:userCoord,
+      receiverCoordinates: userCoord,
     })
   }
 
   render() {
+    console.log("in receiver render", this.props.giversArray)
     return (
       <div className='backgroundReceiver'>{
         this.state.loggedUser ?
-        <div>
-          <MapContainer 
-            giversArray={this.props.giversArray}
-            returnCoordinates={this.setCoordinates}
-            returnUserPosition={this.setUserCoordinates}
-          /> 
-          <Bonbondex 
-            giversArray={this.props.giversArray}
-            giverCoordinates={this.state.giverCoordinates}
-            receiverCoordinates={this.state.receiverCoordinates}
+          <div>
+            <MapContainer
+              giversArray={this.props.giversArray}
+              returnCoordinates={this.setCoordinates}
+              returnUserPosition={this.setUserCoordinates}
+            />
+            <Bonbondex
+              giversArray={this.props.giversArray}
+              giverCoordinates={this.state.giverCoordinates}
+              receiverCoordinates={this.state.receiverCoordinates}
+            />
+          </div>
+          :
+          <Login
+          giversArray={this.props.giversArray}
+          userStatus={this.props.userStatus}
+            setLoggedUser={this.setLoggedUser}
           />
-        </div>
-        :
-        <Login 
-          userStatus = {this.props.userStatus}
-          setLoggedUser = {this.setLoggedUser}
-        />
       }</div>
     );
   }

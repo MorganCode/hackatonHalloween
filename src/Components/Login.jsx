@@ -11,6 +11,8 @@ class Login extends Component {
       userName: '',
       password: '',
     }
+
+    console.log("in login", this.props.giversArray)
   }
 
   setNewUser=()=>{
@@ -61,23 +63,23 @@ class Login extends Component {
       render.push(
         <div>
           <input type="text" name="prenom" placeholder="Prénom"  onChange={this.getUserName} />
-          <input type="password" name="password"  placeholder="Password"  onChange={this.getPassword} onKeyPress={this.enterPassword} />
+          <input type="password" name="password"  placeholder="Password"  onChange={this.getPassword} /*onKeyPress={this.enterPassword}*/ />
         </div>
       )
     }
     return render 
   }
 
-  enterPassword = (e) => {
+  /*enterPassword = (e) => {
     if (e.key === 'Enter') {
       this.checkLogginInfo(this.props.giversArray, this.state.userName, this.state.password)
     }
-  }
+  }*/
 
   checkLogginInfo = (array, name, password) => {
+    console.log(this.props.giversArray)
     let users = array.map(name => name.firstName)
     let passwords = array.map(password => password.password)
-    console.log(name, password)
     for (let i = 0; i < users.length; i++) {
       if (name === users[i] && password !== passwords[i]) {
         alert("Mot de passe érroné")
@@ -89,7 +91,8 @@ class Login extends Component {
   }
 
   render() {
-    
+    console.log("in login render", this.props.giversArray)
+
     return (
       <div id="userInfo">
         
