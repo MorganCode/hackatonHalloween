@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
 import '../Styles/bonbondex.css';
 import { Container, Row, Col } from 'reactstrap';
-import bonObon from '../Assets/bonObon.jpg';
-import carambar from '../Assets/carambar.png';
+import coca from '../Assets/coca.jpg';
+import carambar from '../Assets/carambar.jpg';
 import croco from '../Assets/croco.jpg';
 import schtroumpfs from '../Assets/schtroumpfs.jpg';
 import sucette from '../Assets/sucette.jpg';
-import tetesbrulees from '../Assets/tetesbrulees.png';
+import dragibus from '../Assets/dragibus.jpg';
 
 class Bonbondex extends Component {
 
   constructor(props) {
     super(props);
-    this.api = 'https://api-adresse.data.gouv.fr/search/?q=';
     this.state = {
-      bonObon: {
+      coca: {
         selected: false,
         style: {
           opacity: "0.7",
-          backgroundImage: `url(${bonObon})`,
+          backgroundImage: `url(${coca})`,
           top: window.innerHeight - 310,
         }
       },
@@ -30,7 +29,7 @@ class Bonbondex extends Component {
           top: window.innerHeight - 310,
         }
       },
-      crocodile: {
+      croco: {
         selected: false,
         style: {
           opacity: "0.7",
@@ -54,22 +53,19 @@ class Bonbondex extends Component {
           top: window.innerHeight - 310,
         }
       },
-      tetesbrulees: {
+      dragibus: {
         selected: false,
         style: {
           opacity: "0.7",
-          backgroundImage: `url(${tetesbrulees})`,
+          backgroundImage: `url(${dragibus})`,
           top: window.innerHeight - 310,
         }
       },
-
-      userPosition:{},
     }
-    console.log(this.props.giversArray)
   }
 
   clickCandy = (selection) => {
-    if (this.state[selection].selected === false && this.checkDistance(selection)) {
+    if (this.state[selection].selected === false) {
       this.setState({
         [selection]:
         {
@@ -163,15 +159,19 @@ class Bonbondex extends Component {
       <div>
         
       <Container className="container">
-      <hr className="hr"/>
-        <Row>
-          <Col xs="3" md={{ size: 1, offset: 1 }}><div onClick={() => this.clickCandy("bonObon")} className="candy position1" style={this.state.bonObon.style}></div></Col>
+      
+        <Row className="container1">
+          <Col xs="3" md={{ size: 1, offset: 1 }}><div onClick={() => this.clickCandy("coca")} className="candy position1" style={this.state.coca.style}></div></Col>
           <Col xs="3" md={{ size: 1, offset: 1 }}><div onClick={() => this.clickCandy("carambar")} className="candy position2" style={this.state.carambar.style}></div></Col>
-          <Col xs="3" md={{ size: 1, offset: 1 }}><div onClick={() => this.clickCandy("crocodile")} className="candy position3" style={this.state.crocodile.style}></div></Col>
+          <Col xs="3" md={{ size: 1, offset: 1 }}><div onClick={() => this.clickCandy("croco")} className="candy position3" style={this.state.croco.style}></div></Col>
+        </Row>
+        <Row className="container2">
           <Col xs="3" md={{ size: 1, offset: 1 }}><div onClick={() => this.clickCandy("schtroumpfs")} className="candy position4" style={this.state.schtroumpfs.style}></div></Col>
           <Col xs="3" md={{ size: 1, offset: 1 }}><div onClick={() => this.clickCandy("sucette")} className="candy position5" style={this.state.sucette.style}></div></Col>
-          <Col xs="3" md={{ size: 1, offset: 1 }}><div onClick={() => this.clickCandy("tetesbrulees")} className="candy position6" style={this.state.tetesbrulees.style}></div></Col>
+          <Col xs="3" md={{ size: 1, offset: 1 }}><div onClick={() => this.clickCandy("dragibus")} className="candy position6" style={this.state.dragibus.style}></div></Col>
         </Row>
+        
+
       </Container>
       </div>
     )

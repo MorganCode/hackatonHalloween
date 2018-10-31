@@ -3,11 +3,11 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import '../Styles/Map.css'
 import GiverModel from '../Models/GiverModel.jsx'
 import Crocodile from "../Assets/croco.jpg"
-import BonObon from "../Assets/bonObon.jpg"
+import BonObon from "../Assets/dragibus.jpg"
 import Dragibus from "../Assets/citrouille.jpeg"
 import Schtroumpfs from "../Assets/schtroumpfs.jpg"
 import Sucette from "../Assets/sucette.jpg"
-import Carambar from "../Assets/carambar.png"
+import Carambar from "../Assets/carambar.jpg"
 import StarRatings from 'react-star-ratings';
 export class MapContainer extends Component {
 

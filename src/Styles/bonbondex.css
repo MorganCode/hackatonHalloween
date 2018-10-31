@@ -1,44 +1,47 @@
 .candy {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 15vmin;
-    width: 15vmin;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 15vmin;
+  width: 15vmin;
 }
 
 .container {
   position: absolute;
-  text-align: center;
-  bottom: 0;
+  right: -17vh;
+  bottom: 3vh;
+}
+.row{
+  margin-right: 9px !important;
+  margin-left: -9px !important;
+}
+.container1 {
+  margin: auto;
+  margin-right: 1vw;
+  margin-bottom: 18px;
+
+}
+.container2 {
+  margin: auto;
 }
 
-.hr {
-  color:#A61600; 
-  height: 3px; 
-  background-color: #A61600;
-  width: 100%;
-  
-}
+
+
 /*.position1 {
-  left: 10px;
+left: 10px;
 }
-
 .position2 {
-  left: 220px;
+left: 220px;
 }
-
 .position3 {
-  left: 440px;
+left: 440px;
 }
-
 .position4 {
-  left: 660px;
+left: 660px;
 }
-
 .position5 {
-  left: 880px;
+left: 880px;
 }
-
 .position6 {
-  left: 1100px;
+left: 1100px;
 }*/
