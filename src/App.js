@@ -97,6 +97,11 @@ class App extends Component {
     this.giversArray = [this.giverJeanDupont, this.giverMartinDurand, this.giverPaulMachin]
   }
 
+  setNotation = (giver, note) => {
+    giver.notation.push(note)
+    giver.finalNotation = giver.notation.reduce((a, b) => a + b)
+  }
+
   render() {
     return (
       <div className="App">
@@ -105,7 +110,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" render={()=><HomePage/>}/>
                 <Route exact path="/giver" render={()=><Giver/>}/>
-                <Route exact path="/receiver" render={()=><Receiver giversArray={this.giversArray}/>} />
+                <Route exact path="/receiver" render={()=><Receiver giversArray={this.giversArray} setNotation={this.setNotation}/>} />
               </Switch>
             </BrowserRouter>
       </div>

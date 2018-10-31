@@ -8,6 +8,7 @@ class Receiver extends Component {
       <div>
         <MapContainer 
           giversArray={this.props.giversArray}
+          setNotation={this.props.setNotation}
         /> 
         <Bonbondex 
           giversArray={this.props.giversArray}

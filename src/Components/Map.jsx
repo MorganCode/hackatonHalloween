@@ -8,12 +8,12 @@ import Dragibus from "../Assets/citrouille.jpeg"
 import Schtroumpfs from "../Assets/schtroumpfs.jpg"
 import Sucette from "../Assets/sucette.jpg"
 import Carambar from "../Assets/carambar.png"
-
+import StarRatings from 'react-star-ratings';
 export class MapContainer extends Component {
 
   constructor(props) {
     super(props)
-    
+
     this.api = 'https://api-adresse.data.gouv.fr/search/?q=';
 
     this.state = {
@@ -24,6 +24,7 @@ export class MapContainer extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
+      rating: 3,
     }
 
     this.pos = {}
@@ -90,9 +91,9 @@ export class MapContainer extends Component {
 
   // }
 
-  renderAllMarkers=()=>{
+  renderAllMarkers = () => {
     let renderArray = []
-    for(let i=0;i<3;i++){
+    for (let i = 0; i < 3; i++) {
       renderArray.push(this.renderOneMarker(this.props.giversArray[i]))
       // renderArray.push(this.renderOneMarker(this.props.giversArray[i]))
     }
@@ -101,7 +102,7 @@ export class MapContainer extends Component {
     // return renderArray;
   }
 
-  renderOneMarker=(giver)=>{
+  renderOneMarker = (giver) => {
     // console.log(giver)
     let query = giver.adress.streetNumber + "+" + giver.adress.streetType + "+" + giver.adress.streetName + "&postcode=" + giver.adress.postalCode;
 
@@ -110,7 +111,7 @@ export class MapContainer extends Component {
       .then(data => {
         let fetchLocalLat = data.features[0].geometry.coordinates[1];
         let fetchLocalLong = data.features[0].geometry.coordinates[0];
-        this.pos = {lat: fetchLocalLat, lng: fetchLocalLong};
+        this.pos = { lat: fetchLocalLat, lng: fetchLocalLong };
         console.log(this.pos)
         // return this.pos
       });
@@ -126,12 +127,13 @@ export class MapContainer extends Component {
     return
   }
 
-  onMarkerClick = (props, marker, e) =>
+  onMarkerClick = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
-    });
+    })
+  }
 
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
@@ -159,11 +161,18 @@ export class MapContainer extends Component {
     }
   }
 
+  changeRating = (newRating, name) => {
+    this.setState({
+      rating: newRating
+    });
+  }
+
   render() {
 
     let localLat = this.state.userPosition.lat;
     let localLong = this.state.userPosition.lng;
-
+    // let { rating } = this.state.rating
+    
     return (
       <div id="mapZone">
         <Map
@@ -201,12 +210,23 @@ export class MapContainer extends Component {
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}>
             <div>
-              {this.displayAdress(this.state.selectedPlace.giver)}
-              {this.displayBonbon(this.state.selectedPlace.giver)}
+              <div>
+                {this.displayAdress(this.state.selectedPlace.giver)}
+                {this.displayBonbon(this.state.selectedPlace.giver)}
+              </div>
             </div>
+            <StarRatings
+              rating={this.state.rating}
+              starRatedColor="orange"
+              changeRating={this.changeRating}
+              numberOfStars={5}
+              name='rating'
+              starDimension="15px"
+            />
           </InfoWindow>
 
         </Map>
+
       </div>
     );
   }
