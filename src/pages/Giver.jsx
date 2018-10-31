@@ -6,6 +6,7 @@ class Giver extends Component {
     return (
       <div>
         <ProfileGiver/>
+        
       </div>
     );
   }

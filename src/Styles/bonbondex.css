@@ -1,0 +1,47 @@
+.candy {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 15vmin;
+  width: 15vmin;
+}
+
+.container {
+  position: absolute;
+  right: -17vh;
+  bottom: 3vh;
+}
+.row{
+  margin-right: 9px !important;
+  margin-left: -9px !important;
+}
+.container1 {
+  margin: auto;
+  margin-right: 1vw;
+  margin-bottom: 18px;
+
+}
+.container2 {
+  margin: auto;
+}
+
+
+
+/*.position1 {
+left: 10px;
+}
+.position2 {
+left: 220px;
+}
+.position3 {
+left: 440px;
+}
+.position4 {
+left: 660px;
+}
+.position5 {
+left: 880px;
+}
+.position6 {
+left: 1100px;
+}*/
