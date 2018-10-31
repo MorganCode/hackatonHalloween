@@ -95,17 +95,34 @@ class App extends Component {
     this.giverPaulMachin = new GiverModel(PaulMachinInfo)
 
     this.giversArray = [this.giverJeanDupont, this.giverMartinDurand, this.giverPaulMachin]
+
+    this.userStatus = ""
+  }
+
+  setUserStatus=(status)=>{
+    this.userStatus = status;
   }
 
   render() {
+
+
     return (
       <div className="App">
         {/* <MapContainer /> */}
             <BrowserRouter>
               <Switch>
                 <Route exact path="/" render={()=><HomePage/>}/>
-                <Route exact path="/giver" render={()=><Giver/>}/>
-                <Route exact path="/receiver" render={()=><Receiver giversArray={this.giversArray}/>} />
+                <Route exact path="/giver" onClick={this.setUserStatus("giver")} render={()=><Giver userStatus = {this.userStatus}/>}/>
+                <Route 
+                  exact path="/receiver" 
+                  onClick={this.setUserStatus("receiver")} 
+                  render={
+                    ()=><Receiver 
+                          giversArray={this.giversArray}
+                          userStatus = {this.userStatus}
+                        />
+                  } 
+                />
               </Switch>
             </BrowserRouter>
       </div>
