@@ -17,7 +17,7 @@ class ProfileGiver extends Component {
       lastName: 'Dupont',
       password: 'password',
       email: 'jeandupont@voila.fr',
-      avatar: 'http://image.noelshack.com/fichiers/2018/44/2/1540914861-avatarjeandupont.jpg',
+      avatar: 'http://image.noelshack.com/fichiers/2018/44/3/1540979367-profilemen.png',
 
       adress: {
         streetNumber: 17,
@@ -29,9 +29,12 @@ class ProfileGiver extends Component {
       },
 
       candy: {
+        coca:false,
         crocodile: false,
-        coca: true,
-        dragibus: true,
+        dragibus:false,
+        sucette:false,
+        carambar:false,
+        schtroumpfs:false,
       },
 
       hasCandy: true,

@@ -23,11 +23,11 @@ class HomePage extends Component {
         </div>
         <div>
           <p><strong>Vous êtes un enfant ? Vous cherchez des bonbons ?</strong> On vous donne une carte au trésor pour les récupérer à coup sûr !</p>
-          <NavLink to="./receiver" className="btn">Je cherche des bonbons</NavLink>
+          <NavLink to="./receiver" className="btnHomePage">Je cherche des bonbons</NavLink>
         </div>
         <div>
           <p>Vous êtes un adulte ? Venez renseigner votre disponibilité et vos bonbons afin d'accueillir les monstres du quartier !</p>
-          <NavLink onClick={this.isGiver} to="./giver" className="btn">Je donne des bonbons</NavLink>
+          <NavLink onClick={this.isGiver} to="./giver" className="btnHomePage">Je donne des bonbons</NavLink>
         </div>
       </div>
     );
