@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../styles/addCandy.css'
-import RowCandyGiver from './RowCandyGiver'
+import '../Styles/addCandy.css'
+
 
 class AddCandy extends Component {
   constructor(props) {
