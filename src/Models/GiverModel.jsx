@@ -20,8 +20,12 @@ class GiverModel {
       };
 
       this.candy = {
-        crocodile: info.candy.crocodile,
         coca: info.candy.coca,
+        carambar:info.candy.carambar,
+        croco: info.candy.croco,
+        coca:info.candy.coca,
+        schtroumpfs:info.candy.schtroumpfs,
+        sucette:info.candy.sucette,
         dragibus: info.candy.dragibus,
       };
 
@@ -30,7 +34,7 @@ class GiverModel {
       this.notation = [];
       this.available = info.available;
   
-}
+  }
 }
 
 

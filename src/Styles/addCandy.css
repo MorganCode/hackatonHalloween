@@ -12,7 +12,6 @@
     color: white;
 }
 
-
 select {
   margin: 20px;
   font-size: 20px;
@@ -20,12 +19,6 @@ select {
   margin: 40px 0px 20px 0px;
   text-align: center;
 }
-
-/* button {
-  margin: 20px;
-  font-size: 25px;
-  border-radius: 10px;
-} */
 
 td {
   border: 1px solid #dddddd;
