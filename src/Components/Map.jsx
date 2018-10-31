@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import '../Styles/Map.css'
 import Croco from "../Assets/croco.jpg"
-import BonObon from "../Assets/dragibus.jpg"
-import Dragibus from "../Assets/citrouille.jpeg"
+import BonObon from "../Assets/coca.jpg"
+import Dragibus from "../Assets/dragibus.jpg"
 import Schtroumpfs from "../Assets/schtroumpfs.jpg"
 import Sucette from "../Assets/sucette.jpg"
 import Carambar from "../Assets/carambar.jpg"

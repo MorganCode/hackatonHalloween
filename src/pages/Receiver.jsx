@@ -52,7 +52,7 @@ class Receiver extends Component {
           :
           <Login
           giversArray={this.props.giversArray}
-          userStatus={this.props.userStatus}
+          userStatus={"Giver"}
             setLoggedUser={this.setLoggedUser}
           />
       }</div>
