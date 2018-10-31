@@ -68,8 +68,6 @@ class ProfileGiver extends Component {
 
 render() {
   
-  console.log(this.showInfoJeanDupont());
-  
   return (
     <container className="profileGiver">
       <img src= {this.GiverJeanDupont.avatar}></img>

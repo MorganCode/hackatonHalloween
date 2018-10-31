@@ -20,22 +20,22 @@ class Giver extends Component {
 
   render() {
     return (
-<div>
-      <div>{
-        this.state.loggedUser ?
-        <div className="giverInterface">
-          <ProfileGiver/>
-          <GiverInterface/>
-        </div>
-        :
-        <Login 
-          userStatus = {this.props.userStatus}
-          setLoggedUser = {this.setLoggedUser}
-          giversArray={this.props.giversArray}
-          setLoggedUser={this.setLoggedUser}
-        />
-      }</div>
-       </div>
+      <div>
+        <div>{
+          this.state.loggedUser ?
+          <div className="giverInterface">
+            <ProfileGiver/>
+            <GiverInterface/>
+          </div>
+          :
+          <Login 
+            userStatus = {this.props.userStatus}
+            setLoggedUser = {this.setLoggedUser}
+            giversArray={this.props.giversArray}
+            setLoggedUser={this.setLoggedUser}
+          />
+        }</div>
+      </div>
     );
   }
 }

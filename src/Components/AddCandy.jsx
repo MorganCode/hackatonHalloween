@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import '../Styles/addCandy.css'
 import { Button } from 'reactstrap';
 
-
-
 class AddCandy extends Component {
   constructor(props) {
     super(props)
@@ -12,7 +10,6 @@ class AddCandy extends Component {
       selectedCandy: ""
     }
   };
-
 
   updateSelectedCandy = (e) => {
     this.setState({
@@ -32,7 +29,6 @@ class AddCandy extends Component {
     this.setState({
       giverInventary: giverInventaryTmp
     })
-    // this.renderCandyTable();
   }
 
   handleDelClick = (i) => {
@@ -46,7 +42,6 @@ class AddCandy extends Component {
 
   renderCandyTable() {
     let render = []
-    console.log(render)
 
     for (let i = 0; i < this.state.giverInventary.length; i++) {
       render.push(
@@ -58,15 +53,11 @@ class AddCandy extends Component {
         </div>
       )
     }
-
-
-    console.log(render)
     return render
   }
 
 
   render() {
-    console.log(this.renderCandyTable())
     return (
       <div className="candySelect">
         <select onChange={this.updateSelectedCandy}>
@@ -78,7 +69,6 @@ class AddCandy extends Component {
           <option value="Carambar">Carambar</option>
           <option value="Sucette">Sucette</option>
         </select>
-        {/* <button type="button" onClick={this.handleAddClick}>Ajoutez</button> */}
         <Button color="warning" onClick={this.handleAddClick} >Ajoutez</Button>
         <div>
           {this.renderCandyTable()}

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import '../Styles/Map.css'
-import GiverModel from '../Models/GiverModel.jsx'
-import Crocodile from "../Assets/croco.jpg"
+import Croco from "../Assets/croco.jpg"
 import BonObon from "../Assets/dragibus.jpg"
 import Dragibus from "../Assets/citrouille.jpeg"
 import Schtroumpfs from "../Assets/schtroumpfs.jpg"
@@ -24,11 +23,12 @@ export class MapContainer extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
+      markers:[],
       rating: 3,
     }
 
     this.pos = {}
-    this.renderProut = []
+    this.renderAllMarkers()
   }
 
   maPosition = (position) => {
@@ -38,6 +38,7 @@ export class MapContainer extends Component {
         lng: position.coords.longitude,
       }
     })
+    this.props.returnUserPosition(this.state.userPosition)
   }
 
   componentDidMount() {
@@ -46,64 +47,15 @@ export class MapContainer extends Component {
     }
   }
 
-  // convertAdressToCoordinates=()=>{
-  //   console.log("in convert adresse to coordinates")
-  //   let longitudeArray = []
-  //   let latitudeArray = []
-  //   for(let i=0;i<3;i++){
-  //     let query = this.giversArray[i].adress.streetNumber + "+" + this.giversArray[i].adress.streetType + "+" + this.giversArray[i].adress.streetName + "&postcode=" + this.giversArray[i].adress.postalCode;
-
-  //     fetch(this.api + query)
-  //       .then(response => response.json())
-  //       .then(data => {
-  //         longitudeArray.push(data.features[0].geometry.coordinates[0]);
-  //         latitudeArray.push(data.features[0].geometry.coordinates[1]);
-  //       })
-  //   }
-  //   let coordinatesArray = [latitudeArray, longitudeArray]
-  //   console.log(coordinatesArray)
-  //   return coordinatesArray;
-  // }
-
-  // renderMarker=()=>{
-  //   let coordinates = this.convertAdressToCoordinates();
-  //   console.log("in render array", (coordinates))
-  //   console.log("coordinates[0]",coordinates[0])
-  //   let fuckCoordinates = coordinates[0]
-  //   console.log("fuckCoordinates", fuckCoordinates)
-  //   console.log("coordinates[0][0]", fuckCoordinates[0])
-  //   let render = []
-  //   for(let i=0;i<3;i++){
-  //     let position={
-  //       lat: coordinates[0][i],
-  //       lng: coordinates[1][i],
-  //     }
-  //     console.log(position)
-  //     render.push(
-  //       <Marker 
-  //         onClick={this.onMarkerClick}
-  //         name={'Current location'}
-  //         position={position}  
-  //       />)
-  //   }
-  //   console.log(render)
-  //   return render
-
-  // }
-
-  renderAllMarkers = () => {
+  renderAllMarkers=()=>{
     let renderArray = []
-    for (let i = 0; i < 3; i++) {
-      renderArray.push(this.renderOneMarker(this.props.giversArray[i]))
-      // renderArray.push(this.renderOneMarker(this.props.giversArray[i]))
+    for(let i=0;i<this.props.giversArray.length;i++){
+      renderArray.push(this.renderOneMarker(this.props.giversArray[i],i))
     }
-    console.log(renderArray)
     return renderArray;
-    // return renderArray;
   }
 
-  renderOneMarker = (giver) => {
-    // console.log(giver)
+  renderOneMarker=(giver,giverIndex)=>{
     let query = giver.adress.streetNumber + "+" + giver.adress.streetType + "+" + giver.adress.streetName + "&postcode=" + giver.adress.postalCode;
 
     fetch(this.api + query)
@@ -111,20 +63,13 @@ export class MapContainer extends Component {
       .then(data => {
         let fetchLocalLat = data.features[0].geometry.coordinates[1];
         let fetchLocalLong = data.features[0].geometry.coordinates[0];
-        this.pos = { lat: fetchLocalLat, lng: fetchLocalLong };
-        console.log(this.pos)
-        // return this.pos
-      });
+        this.pos = {lat: fetchLocalLat, lng: fetchLocalLong};
 
-    if (giver.hasCandy && giver.available) {
-      return (<Marker
-        onClick={this.onMarkerClick}
-        name={'Current location'}
-        position={this.pos}
-        giver={giver}
-      />)
-    }
-    return
+        const markers = this.state.markers;
+        markers[giverIndex] = this.pos;
+        this.setState({markers})
+        this.props.returnCoordinates(this.state.markers)
+      });
   }
 
   onMarkerClick = (props, marker, e) => {
@@ -151,14 +96,16 @@ export class MapContainer extends Component {
   }
 
   displayBonbon = (giver) => {
+    let render=[]
     if (giver) {
-      if (giver.candy.coca) return <img src={BonObon}></img>
-      if (giver.candy.crocodile) return <img src={Crocodile}></img>
-      if (giver.candy.dragibus) return <img src={Dragibus}></img>
-      if (giver.candy.schtroumpfs) return <img src={Schtroumpfs}></img>
-      if (giver.candy.sucette) return <img src={Sucette}></img>
-      if (giver.candy.carambar) return <img src={Carambar}></img>
+      if (giver.candy.coca) render.push(<img src={BonObon}></img>)
+      if (giver.candy.croco) render.push(<img src={Croco}></img>)
+      if (giver.candy.dragibus) render.push(<img src={Dragibus}></img>)
+      if (giver.candy.schtroumpfs) render.push(<img src={Schtroumpfs}></img>)
+      if (giver.candy.sucette) render.push(<img src={Sucette}></img>)
+      if (giver.candy.carambar) render.push(<img src={Carambar}></img>)
     }
+    return render;
   }
 
   changeRating = (newRating, name) => {
@@ -168,10 +115,8 @@ export class MapContainer extends Component {
   }
 
   render() {
-
     let localLat = this.state.userPosition.lat;
     let localLong = this.state.userPosition.lng;
-    // let { rating } = this.state.rating
     
     return (
       <div id="mapZone">
@@ -197,19 +142,21 @@ export class MapContainer extends Component {
             }}
           />
 
-          {/* {this.renderAllMarkers().map((position, index) => (<Marker 
+          {this.state.markers.map(item=><Marker 
             onClick={this.onMarkerClick}
             name={'Current location'}
-            position={position}
-            key={index}
-          />))} */}
-          {this.renderOneMarker(this.props.giversArray[0])}
-          {/* {this.renderOneMarker(this.giversArray[0])} */}
+            position={{
+              lat: item.lat,
+              lng: item.lng,
+            }}
+            giver = {this.props.giversArray[this.state.markers.indexOf(item)]}
+          />)}
 
           <InfoWindow
             marker={this.state.activeMarker}
-            visible={this.state.showingInfoWindow}>
-            <div>
+            visible={this.state.showingInfoWindow}
+            >
+            <div style={{width:"70vw"}}>
               <div>
                 {this.displayAdress(this.state.selectedPlace.giver)}
                 {this.displayBonbon(this.state.selectedPlace.giver)}
