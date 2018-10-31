@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import ProfileGiver from '../Components/ProfileGiver';
 import GiverInterface from '../Components/GiverInterface';
+<<<<<<< HEAD
+import '../Styles/giverInterface.css';
+=======
 import Login from '../Components/Login'
+>>>>>>> dev
 
 class Giver extends Component {
   constructor(props){
@@ -19,6 +23,12 @@ class Giver extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
+      <div className="giverInterface">
+        <ProfileGiver/>
+        <GiverInterface/>
+      </div>
+=======
       <div>{
         this.state.loggedUser ?
         <div>
@@ -31,6 +41,7 @@ class Giver extends Component {
           setLoggedUser = {this.setLoggedUser}
         />
       }</div>
+>>>>>>> dev
     );
   }
 }
