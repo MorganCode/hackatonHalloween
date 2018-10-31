@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../Styles/profileGiver.css';
 import GiverModel from '../Models/GiverModel';
-import '../Assets/avatarJeanDupont.jpg';
 import Switch from 'react-toggle-switch';
 import "../../node_modules/react-toggle-switch/dist/css/switch.min.css"; 
  
@@ -17,7 +16,7 @@ class ProfileGiver extends Component {
       lastName: 'Dupont',
       password: 'password',
       email: 'jeandupont@voila.fr',
-      avatar: 'http://image.noelshack.com/fichiers/2018/44/2/1540914861-avatarjeandupont.jpg',
+      avatar: 'http://image.noelshack.com/fichiers/2018/44/3/1540979367-profilemen.png',
 
       adress: {
         streetNumber: 17,
@@ -29,9 +28,12 @@ class ProfileGiver extends Component {
       },
 
       candy: {
+        coca:false,
         crocodile: false,
-        coca: true,
-        dragibus: true,
+        dragibus:false,
+        sucette:false,
+        carambar:false,
+        schtroumpfs:false,
       },
 
       hasCandy: true,

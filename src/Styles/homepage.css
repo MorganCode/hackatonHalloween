@@ -34,6 +34,6 @@
   margin-bottom: 1vh;
   
 }
-.btn:focus{
+.button:focus{
   outline: none;
 }
