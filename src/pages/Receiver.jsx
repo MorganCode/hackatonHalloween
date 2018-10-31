@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Bonbondex from '../Components/Bonbondex.jsx';
 import MapContainer from '../Components/Map';
-import Login from '../Components/Login'
-
+import '../Styles/receiver.css';
+import Login from '../Components/Login';
 
 class Receiver extends Component {
   constructor(props){
@@ -21,7 +21,6 @@ class Receiver extends Component {
   }
 
   setCoordinates=(coord)=>{
-    console.log("in coord", coord)
     this.setState({
       giverCoordinates:coord
     })
@@ -35,7 +34,7 @@ class Receiver extends Component {
 
   render() {
     return (
-      <div>{
+      <div className='backgroundReceiver'>{
         this.state.loggedUser ?
         <div>
           <MapContainer 

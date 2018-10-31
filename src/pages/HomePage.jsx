@@ -18,17 +18,12 @@ class HomePage extends Component {
   render() {
     return (
       <div className="homepage">
-        <div>
-          <h1>Chass'O Bonbons</h1>
-        </div>
-        <div>
-          <p><strong>Vous êtes un enfant ? Vous cherchez des bonbons ?</strong> On vous donne une carte au trésor pour les récupérer à coup sûr !</p>
-          <NavLink to="./receiver" className="btn">Je cherche des bonbons</NavLink>
-        </div>
-        <div>
-          <p>Vous êtes un adulte ? Venez renseigner votre disponibilité et vos bonbons afin d'accueillir les monstres du quartier !</p>
-          <NavLink onClick={this.isGiver} to="./giver" className="btn">Je donne des bonbons</NavLink>
-        </div>
+          <h1 className='title'>Candy Hunter's</h1>
+          <p className='textHome'><strong>Vous êtes un enfant ? Vous cherchez des bonbons ?</strong> On vous donne une carte au trésor pour les récupérer à coup sûr !</p>
+          <NavLink to="./receiver" className="button">Je cherche des bonbons</NavLink>
+          <p className='textHome'><strong>Vous êtes un adulte ?</strong> Venez renseigner votre disponibilité et vos bonbons afin d'accueillir les monstres du quartier !</p>
+          <NavLink onClick={this.isGiver} to="./giver" className="button">Je donne des bonbons</NavLink>
+        
       </div>
     );
   }

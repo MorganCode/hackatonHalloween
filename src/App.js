@@ -4,22 +4,21 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import Receiver from './pages/Receiver';
 import Giver from './pages/Giver';
-import MapContainer from './Components/Map';
 import GiverModel from './Models/GiverModel'
 
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
 
     let JeanDupontInfo = {
-      id : 0,
-      firstName : 'Jean',
-      lastName : 'Dupont',
-      password : 'JeanDupont',
-      email : 'jeandupont@voila.fr',
-      avatar : 'citrouille.jpeg',
-      adress : {
+      id: 0,
+      firstName: 'Jean',
+      lastName: 'Dupont',
+      password: 'JeanDupont',
+      email: 'jeandupont@voila.fr',
+      avatar: 'citrouille.jpeg',
+      adress: {
         streetNumber: 22,
         streetType: 'avenue',
         streetName: 'Saxe-Gambetta',
@@ -27,27 +26,30 @@ class App extends Component {
         cityName: 'Lyon',
         aptmtNumber: '',
       },
-      candy : {
-        crocodile: true,
-        coca: false,
+      candy: {
+        coca: true,
+        carambar:false,
+        croco: false,
+        schtroumpfs:false,
+        sucette:false,
         dragibus: false,
       },
-      hasCandy : true,
-      finalNotation : 0,
-      notation : [],
-      available : true,
+      hasCandy: true,
+      finalNotation: 0,
+      notation: [],
+      available: true,
     };
 
     this.giverJeanDupont = new GiverModel(JeanDupontInfo)
 
     let MartinDurandInfo = {
-      id : 1,
-      firstName : 'Martin',
-      lastName : 'Durand',
-      password : 'MartinDurand',
-      email : 'martindurand@voila.fr',
-      avatar : 'citrouille.jpeg',
-      adress : {
+      id: 1,
+      firstName: 'Martin',
+      lastName: 'Durand',
+      password: 'MartinDurand',
+      email: 'martindurand@voila.fr',
+      avatar: 'citrouille.jpeg',
+      adress: {
         streetNumber: 20,
         streetType: 'rue',
         streetName: 'Delandine',
@@ -55,26 +57,29 @@ class App extends Component {
         cityName: 'Lyon',
         aptmtNumber: '',
       },
-      candy : {
-        crocodile: true,
+      candy: {
         coca: false,
+        carambar:true,
+        croco: false,
+        schtroumpfs:false,
+        sucette:false,
         dragibus: false,
       },
-      hasCandy : false,
-      finalNotation : 0,
-      notation : [],
-      available : true,
+      hasCandy: false,
+      finalNotation: 0,
+      notation: [],
+      available: true,
     };
     this.giverMartinDurand = new GiverModel(MartinDurandInfo)
 
     let PaulMachinInfo = {
-      id : 2,
-      firstName : 'Paul',
-      lastName : 'Machin',
-      password : 'PaulMachin',
-      email : 'paulmachin@voila.fr',
-      avatar : 'citrouille.jpeg',
-      adress : {
+      id: 2,
+      firstName: 'Paul',
+      lastName: 'Machin',
+      password: 'PaulMachin',
+      email: 'paulmachin@voila.fr',
+      avatar: 'citrouille.jpeg',
+      adress: {
         streetNumber: 22,
         streetType: 'rue',
         streetName: 'Pasteur',
@@ -82,15 +87,18 @@ class App extends Component {
         cityName: 'Lyon',
         aptmtNumber: '',
       },
-      candy : {
-        crocodile: true,
-        coca: true,
+      candy: {
+        coca: false,
+        carambar:true,
+        croco: true,
+        schtroumpfs:true,
+        sucette:false,
         dragibus: false,
       },
-      hasCandy : true,
-      finalNotation : 0,
-      notation : [],
-      available : false,
+      hasCandy: true,
+      finalNotation: 0,
+      notation: [],
+      available: true,
     };
     this.giverPaulMachin = new GiverModel(PaulMachinInfo)
 
@@ -99,8 +107,13 @@ class App extends Component {
     this.userStatus = ""
   }
 
-  setUserStatus=(status)=>{
+  setUserStatus = (status) => {
     this.userStatus = status;
+  }
+
+  setNotation = (giver, note) => {
+    giver.notation.push(note)
+    giver.finalNotation = giver.notation.reduce((a, b) => a + b)
   }
 
   render() {
@@ -108,23 +121,23 @@ class App extends Component {
 
     return (
       <div className="App">
-        {/* <MapContainer /> */}
-            <BrowserRouter>
-              <Switch>
-                <Route exact path="/" render={()=><HomePage/>}/>
-                <Route exact path="/giver" onClick={this.setUserStatus("giver")} render={()=><Giver userStatus = {this.userStatus}/>}/>
-                <Route 
-                  exact path="/receiver" 
-                  onClick={this.setUserStatus("receiver")} 
-                  render={
-                    ()=><Receiver 
-                          giversArray={this.giversArray}
-                          userStatus = {this.userStatus}
-                        />
-                  } 
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" render={() => <HomePage />} />
+            <Route exact path="/giver" onClick={this.setUserStatus("giver")} render={() => <Giver userStatus={this.userStatus} />} />
+            <Route
+              exact path="/receiver"
+              onClick={this.setUserStatus("receiver")}
+              render={
+                () => <Receiver
+                  giversArray={this.giversArray}
+                  userStatus={this.userStatus}
+                  setNotation={this.setNotation}
                 />
-              </Switch>
-            </BrowserRouter>
+              }
+            />
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }

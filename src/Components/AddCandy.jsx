@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../Styles/addCandy.css'
-
+import { Button } from 'reactstrap';
 
 class AddCandy extends Component {
   constructor(props) {
@@ -11,7 +11,6 @@ class AddCandy extends Component {
     }
   };
 
-
   updateSelectedCandy = (e) => {
     this.setState({
       selectedCandy: e.target.value,
@@ -21,17 +20,20 @@ class AddCandy extends Component {
 
   handleAddClick = () => {
     let giverInventaryTmp = this.state.giverInventary
-    giverInventaryTmp.push(this.state.selectedCandy)
+
+    if (this.state.selectedCandy.length !== 0) {
+      giverInventaryTmp.push(this.state.selectedCandy) 
+    }
+     
 
     this.setState({
       giverInventary: giverInventaryTmp
     })
-    // this.renderCandyTable();
   }
 
-  handleDelClick = (i)  => {
+  handleDelClick = (i) => {
     let giverInventaryTmp = this.state.giverInventary
-    giverInventaryTmp.splice(i,1)
+    giverInventaryTmp.splice(i, 1)
 
     this.setState({
       giverInventary: giverInventaryTmp
@@ -40,36 +42,35 @@ class AddCandy extends Component {
 
   renderCandyTable() {
     let render = []
-    console.log(render)
-    
+
     for (let i = 0; i < this.state.giverInventary.length; i++) {
       render.push(
-        <tr>
-          <td>{this.state.giverInventary[i]}</td>
-          <td onClick={()=>this.handleDelClick(i)}>Supprimer</td>
-        </tr>
-        )
-    } 
-
-    
-    console.log(render)
+        <div className="fckCandyTable">
+          <tr>
+            <td>{this.state.giverInventary[i]}</td>
+          </tr>
+          <Button color="warning" onClick={() => this.handleDelClick(i)}>X</Button>
+        </div>
+      )
+    }
     return render
   }
-  
+
 
   render() {
-    console.log(this.renderCandyTable())
     return (
-      <div>
+      <div className="candySelect">
         <select onChange={this.updateSelectedCandy}>
-          <option value="dragidus">Dragidus</option>
-          <option value="fraises-tagada">Fraises tagada</option>
-          <option value="schtroumpfs">Schtroumpfs</option>
-          <option value="croco">Croco</option>
+        <option selected disabled>Choisissez vos bonbons</option>
+          <option value="Dragibus">Dragibus</option>
+          <option value="Coca">Coca</option>
+          <option value="Schtroumpfs">Schtroumpfs</option>
+          <option value="Croco">Croco</option>
+          <option value="Carambar">Carambar</option>
+          <option value="Sucette">Sucette</option>
         </select>
-        <button type="button" onClick={this.handleAddClick}>Ajoutez</button>
-
-        <div className="candyTable">
+        <Button color="warning" onClick={this.handleAddClick} >Ajoutez</Button>
+        <div>
           {this.renderCandyTable()}
         </div>
 

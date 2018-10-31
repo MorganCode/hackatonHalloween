@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import '../Styles/Map.css'
-import GiverModel from '../Models/GiverModel.jsx'
-import Crocodile from "../Assets/croco.jpg"
-import BonObon from "../Assets/bonObon.jpg"
+import Croco from "../Assets/croco.jpg"
+import BonObon from "../Assets/dragibus.jpg"
 import Dragibus from "../Assets/citrouille.jpeg"
 import Schtroumpfs from "../Assets/schtroumpfs.jpg"
 import Sucette from "../Assets/sucette.jpg"
-import Carambar from "../Assets/carambar.png"
-
+import Carambar from "../Assets/carambar.jpg"
+import StarRatings from 'react-star-ratings';
 export class MapContainer extends Component {
 
   constructor(props) {
     super(props)
-    
+
     this.api = 'https://api-adresse.data.gouv.fr/search/?q=';
 
     this.state = {
@@ -25,6 +24,7 @@ export class MapContainer extends Component {
       activeMarker: {},
       selectedPlace: {},
       markers:[],
+      rating: 3,
     }
 
     this.pos = {}
@@ -51,11 +51,8 @@ export class MapContainer extends Component {
     let renderArray = []
     for(let i=0;i<this.props.giversArray.length;i++){
       renderArray.push(this.renderOneMarker(this.props.giversArray[i],i))
-      // renderArray.push(this.renderOneMarker(this.props.giversArray[i]))
     }
-    console.log("in map", renderArray)
     return renderArray;
-    // return renderArray;
   }
 
   renderOneMarker=(giver,giverIndex)=>{
@@ -71,17 +68,17 @@ export class MapContainer extends Component {
         const markers = this.state.markers;
         markers[giverIndex] = this.pos;
         this.setState({markers})
-        console.log(this.state.markers)
         this.props.returnCoordinates(this.state.markers)
       });
   }
 
-  onMarkerClick = (props, marker, e) =>
+  onMarkerClick = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
-    });
+    })
+  }
 
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
@@ -99,21 +96,28 @@ export class MapContainer extends Component {
   }
 
   displayBonbon = (giver) => {
+    let render=[]
     if (giver) {
-      if (giver.candy.coca) return <img src={BonObon}></img>
-      if (giver.candy.crocodile) return <img src={Crocodile}></img>
-      if (giver.candy.dragibus) return <img src={Dragibus}></img>
-      if (giver.candy.schtroumpfs) return <img src={Schtroumpfs}></img>
-      if (giver.candy.sucette) return <img src={Sucette}></img>
-      if (giver.candy.carambar) return <img src={Carambar}></img>
+      if (giver.candy.coca) render.push(<img src={BonObon}></img>)
+      if (giver.candy.croco) render.push(<img src={Croco}></img>)
+      if (giver.candy.dragibus) render.push(<img src={Dragibus}></img>)
+      if (giver.candy.schtroumpfs) render.push(<img src={Schtroumpfs}></img>)
+      if (giver.candy.sucette) render.push(<img src={Sucette}></img>)
+      if (giver.candy.carambar) render.push(<img src={Carambar}></img>)
     }
+    return render;
+  }
+
+  changeRating = (newRating, name) => {
+    this.setState({
+      rating: newRating
+    });
   }
 
   render() {
-
     let localLat = this.state.userPosition.lat;
     let localLong = this.state.userPosition.lng;
-
+    
     return (
       <div id="mapZone">
         <Map
@@ -150,14 +154,27 @@ export class MapContainer extends Component {
 
           <InfoWindow
             marker={this.state.activeMarker}
-            visible={this.state.showingInfoWindow}>
-            <div>
-              {this.displayAdress(this.state.selectedPlace.giver)}
-              {this.displayBonbon(this.state.selectedPlace.giver)}
+            visible={this.state.showingInfoWindow}
+            
+            >
+            <div style={{width:"70vw"}}>
+              <div>
+                {this.displayAdress(this.state.selectedPlace.giver)}
+                {this.displayBonbon(this.state.selectedPlace.giver)}
+              </div>
             </div>
+            <StarRatings
+              rating={this.state.rating}
+              starRatedColor="orange"
+              changeRating={this.changeRating}
+              numberOfStars={5}
+              name='rating'
+              starDimension="15px"
+            />
           </InfoWindow>
 
         </Map>
+
       </div>
     );
   }

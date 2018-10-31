@@ -1,0 +1,8 @@
+.creature{
+  position: absolute;
+  left: 2vw;
+  bottom: 0vh;
+  height: 25%;
+  width: 30%;
+  z-index: 15;
+}

@@ -7,7 +7,6 @@ class Login extends Component {
     this.state={
       newUser:false,
     }
-    console.log(this.props.userStatus)
   }
 
   setNewUser=()=>{
@@ -17,7 +16,6 @@ class Login extends Component {
   }
 
   renderNewUserInfo=()=>{
-    console.log("status",this.props.userStatus)
     let render=[]
     if(this.state.newUser){
       render.push(
@@ -29,7 +27,6 @@ class Login extends Component {
       )
     
       if(this.props.userStatus === "receiver"){
-        console.log("i'm in !")
         let render = []
         render.push(
           <div>

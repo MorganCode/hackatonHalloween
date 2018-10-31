@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ProfileGiver from '../Components/ProfileGiver';
 import GiverInterface from '../Components/GiverInterface';
+import '../Styles/giverInterface.css';
 import Login from '../Components/Login'
 
 class Giver extends Component {
@@ -19,18 +20,20 @@ class Giver extends Component {
 
   render() {
     return (
-      <div>{
-        this.state.loggedUser ?
-        <div>
-          <ProfileGiver/>
-          <GiverInterface/>
-        </div>
-        :
-        <Login 
-          userStatus = {this.props.userStatus}
-          setLoggedUser = {this.setLoggedUser}
-        />
-      }</div>
+      <div>
+        <div>{
+          this.state.loggedUser ?
+          <div className="giverInterface">
+            <ProfileGiver/>
+            <GiverInterface/>
+          </div>
+          :
+          <Login 
+            userStatus = {this.props.userStatus}
+            setLoggedUser = {this.setLoggedUser}
+          />
+        }</div>
+      </div>
     );
   }
 }
