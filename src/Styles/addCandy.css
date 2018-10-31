@@ -1,0 +1,45 @@
+.candySelect {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  margin: auto;
+}
+
+.candySelect .btn {
+    width: 150px;
+    margin: auto;
+    background-color: #854B86;
+    color: white;
+}
+
+select {
+  margin: 20px;
+  font-size: 20px;
+  border: 1px solid darkgray;
+  margin: 40px 0px 20px 0px;
+  text-align: center;
+}
+
+td {
+  border: 1px solid #dddddd;
+  background-color: white;
+  border-radius: 10px;
+  min-width: 150px; 
+  text-align: left;
+  padding: 8px;
+  margin: 0px 10px 5px 0px;
+}
+
+.fckCandyTable {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 10px 0;
+}
+
+.fckCandyTable .btn {
+  margin: 0 0 0 10px;
+  width: 50px;
+  background-color: #854B86;
+  color: white;
+  font-weight: 700;
+}

@@ -1,11 +1,39 @@
-.homepage {
-  width: 80%;
-  margin: auto;
+@import url('https://fonts.googleapis.com/css?family=Spicy+Rice');
+.title{
+  font-family: 'Spicy Rice', cursive;
+  margin-top: 10vh;
 }
 
-.btn {
-  background-color: rgba(190, 99, 24, 0.8);
-  border-radius: 10px;
-  padding: 5px;
-  color: black;
+.homepage {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url(http://image.noelshack.com/fichiers/2018/44/3/1540968941-fondhome.jpg);
+  background-size: cover;
+  margin: auto;
+  height: 640px;
+  width: 360px;
+  color: rgb(255, 255, 255);
+  
+}
+.textHome{
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.button {
+  font-weight: bold;
+  width: 180px;
+  height: 60px;
+  background-color: rgba(255, 255, 255,0.9);
+  color: rgb(0, 0, 0);
+  border-radius: 5px;
+  font-size: 20px;
+  text-align: center;
+  margin-top: -1vh;
+  margin-bottom: 1vh;
+  
+}
+.button:focus{
+  outline: none;
 }
