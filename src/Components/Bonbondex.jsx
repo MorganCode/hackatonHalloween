@@ -61,9 +61,6 @@ class Bonbondex extends Component {
           top: window.innerHeight - 310,
         }
       },
-
-      localmarker: [],
-
     }
   }
 
@@ -96,10 +93,6 @@ class Bonbondex extends Component {
 
   checkDistance = (selection) => {
     for (let i = 0; i < this.props.giversArray.length; i++) {
-
-        console.log("distance", this.calculateDistance(this.props.receiverCoordinates, this.props.giverCoordinates[i]))
-        console.log("hasCandy", this.props.giversArray[i].candy[selection])
-        console.log("isAvailable", this.props.giversArray[i].available)
 
         if (this.calculateDistance(this.props.receiverCoordinates, this.props.giverCoordinates[i]) < 50 && this.props.giversArray[i].candy[selection] && this.props.giversArray[i].available) {
           return true

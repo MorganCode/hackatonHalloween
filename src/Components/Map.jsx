@@ -155,7 +155,6 @@ export class MapContainer extends Component {
           <InfoWindow
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}
-            
             >
             <div style={{width:"70vw"}}>
               <div>
