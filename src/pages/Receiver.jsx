@@ -9,12 +9,27 @@ class Receiver extends Component {
     super(props)
     this.state={
       loggedUser:false,
+      giverCoordinates:[],
+      receiverCoordinates:{}
     }
   }
 
   setLoggedUser=()=>{
     this.setState({
       loggedUser: true,
+    })
+  }
+
+  setCoordinates=(coord)=>{
+    console.log("in coord", coord)
+    this.setState({
+      giverCoordinates:coord
+    })
+  }
+
+  setUserCoordinates=(userCoord)=>{
+    this.setState({
+      receiverCoordinates:userCoord,
     })
   }
 
@@ -25,9 +40,13 @@ class Receiver extends Component {
         <div>
           <MapContainer 
             giversArray={this.props.giversArray}
+            returnCoordinates={this.setCoordinates}
+            returnUserPosition={this.setUserCoordinates}
           /> 
           <Bonbondex 
             giversArray={this.props.giversArray}
+            giverCoordinates={this.state.giverCoordinates}
+            receiverCoordinates={this.state.receiverCoordinates}
           />
         </div>
         :

@@ -24,10 +24,11 @@ export class MapContainer extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
+      markers:[],
     }
 
     this.pos = {}
-    this.renderProut = []
+    this.renderAllMarkers()
   }
 
   maPosition = (position) => {
@@ -37,6 +38,7 @@ export class MapContainer extends Component {
         lng: position.coords.longitude,
       }
     })
+    this.props.returnUserPosition(this.state.userPosition)
   }
 
   componentDidMount() {
@@ -45,64 +47,18 @@ export class MapContainer extends Component {
     }
   }
 
-  // convertAdressToCoordinates=()=>{
-  //   console.log("in convert adresse to coordinates")
-  //   let longitudeArray = []
-  //   let latitudeArray = []
-  //   for(let i=0;i<3;i++){
-  //     let query = this.giversArray[i].adress.streetNumber + "+" + this.giversArray[i].adress.streetType + "+" + this.giversArray[i].adress.streetName + "&postcode=" + this.giversArray[i].adress.postalCode;
-
-  //     fetch(this.api + query)
-  //       .then(response => response.json())
-  //       .then(data => {
-  //         longitudeArray.push(data.features[0].geometry.coordinates[0]);
-  //         latitudeArray.push(data.features[0].geometry.coordinates[1]);
-  //       })
-  //   }
-  //   let coordinatesArray = [latitudeArray, longitudeArray]
-  //   console.log(coordinatesArray)
-  //   return coordinatesArray;
-  // }
-
-  // renderMarker=()=>{
-  //   let coordinates = this.convertAdressToCoordinates();
-  //   console.log("in render array", (coordinates))
-  //   console.log("coordinates[0]",coordinates[0])
-  //   let fuckCoordinates = coordinates[0]
-  //   console.log("fuckCoordinates", fuckCoordinates)
-  //   console.log("coordinates[0][0]", fuckCoordinates[0])
-  //   let render = []
-  //   for(let i=0;i<3;i++){
-  //     let position={
-  //       lat: coordinates[0][i],
-  //       lng: coordinates[1][i],
-  //     }
-  //     console.log(position)
-  //     render.push(
-  //       <Marker 
-  //         onClick={this.onMarkerClick}
-  //         name={'Current location'}
-  //         position={position}  
-  //       />)
-  //   }
-  //   console.log(render)
-  //   return render
-
-  // }
-
   renderAllMarkers=()=>{
     let renderArray = []
-    for(let i=0;i<3;i++){
-      renderArray.push(this.renderOneMarker(this.props.giversArray[i]))
+    for(let i=0;i<this.props.giversArray.length;i++){
+      renderArray.push(this.renderOneMarker(this.props.giversArray[i],i))
       // renderArray.push(this.renderOneMarker(this.props.giversArray[i]))
     }
-    console.log(renderArray)
+    console.log("in map", renderArray)
     return renderArray;
     // return renderArray;
   }
 
-  renderOneMarker=(giver)=>{
-    // console.log(giver)
+  renderOneMarker=(giver,giverIndex)=>{
     let query = giver.adress.streetNumber + "+" + giver.adress.streetType + "+" + giver.adress.streetName + "&postcode=" + giver.adress.postalCode;
 
     fetch(this.api + query)
@@ -111,19 +67,13 @@ export class MapContainer extends Component {
         let fetchLocalLat = data.features[0].geometry.coordinates[1];
         let fetchLocalLong = data.features[0].geometry.coordinates[0];
         this.pos = {lat: fetchLocalLat, lng: fetchLocalLong};
-        console.log(this.pos)
-        // return this.pos
-      });
 
-    if (giver.hasCandy && giver.available) {
-      return (<Marker
-        onClick={this.onMarkerClick}
-        name={'Current location'}
-        position={this.pos}
-        giver={giver}
-      />)
-    }
-    return
+        const markers = this.state.markers;
+        markers[giverIndex] = this.pos;
+        this.setState({markers})
+        console.log(this.state.markers)
+        this.props.returnCoordinates(this.state.markers)
+      });
   }
 
   onMarkerClick = (props, marker, e) =>
@@ -188,14 +138,15 @@ export class MapContainer extends Component {
             }}
           />
 
-          {/* {this.renderAllMarkers().map((position, index) => (<Marker 
+          {this.state.markers.map(item=><Marker 
             onClick={this.onMarkerClick}
             name={'Current location'}
-            position={position}
-            key={index}
-          />))} */}
-          {this.renderOneMarker(this.props.giversArray[0])}
-          {/* {this.renderOneMarker(this.giversArray[0])} */}
+            position={{
+              lat: item.lat,
+              lng: item.lng,
+            }}
+            giver = {this.props.giversArray[this.state.markers.indexOf(item)]}
+          />)}
 
           <InfoWindow
             marker={this.state.activeMarker}

@@ -20,9 +20,9 @@ class App extends Component {
       email : 'jeandupont@voila.fr',
       avatar : 'citrouille.jpeg',
       adress : {
-        streetNumber: 31,
-        streetType: 'rue',
-        streetName: 'Lortet',
+        streetNumber: 22,
+        streetType: 'avenue',
+        streetName: 'Saxe-Gambetta',
         postalCode: 69007,
         cityName: 'Lyon',
         aptmtNumber: '',
@@ -75,11 +75,11 @@ class App extends Component {
       email : 'paulmachin@voila.fr',
       avatar : 'citrouille.jpeg',
       adress : {
-        streetNumber: 140,
-        streetType: 'avenue',
-        streetName: 'Jean Jaurès',
-        postalCode: 75019,
-        cityName: 'Paris',
+        streetNumber: 22,
+        streetType: 'rue',
+        streetName: 'Pasteur',
+        postalCode: 69007,
+        cityName: 'Lyon',
         aptmtNumber: '',
       },
       candy : {
@@ -90,7 +90,7 @@ class App extends Component {
       hasCandy : true,
       finalNotation : 0,
       notation : [],
-      available : true,
+      available : false,
     };
     this.giverPaulMachin = new GiverModel(PaulMachinInfo)
 

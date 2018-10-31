@@ -29,6 +29,7 @@ class Login extends Component {
       )
     
       if(this.props.userStatus === "receiver"){
+        console.log("i'm in !")
         let render = []
         render.push(
           <div>
