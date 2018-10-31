@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import '../Styles/login.css'
+import { Redirect } from 'react-router';
+import '../Styles/login.css';
+
 
 class Login extends Component {
   constructor(props){
     super(props)
     this.state={
       newUser:false,
+      userName: '',
+      password: '',
     }
-    console.log(this.props.userStatus)
   }
 
   setNewUser=()=>{
@@ -16,8 +19,14 @@ class Login extends Component {
     })
   }
 
+  getUserName = (e) => {
+    this.setState({userName: e.target.value})
+  }
+  getPassword = (e) => {
+    this.setState({password: e.target.value})
+  }
+
   renderNewUserInfo=()=>{
-    console.log("status",this.props.userStatus)
     let render=[]
     if(this.state.newUser){
       render.push(
@@ -51,26 +60,36 @@ class Login extends Component {
     else{
       render.push(
         <div>
-          <input type="text" name="prenom" placeholder="Prénom"/>
-          <input type="password" name="password"  placeholder="Password"/>
+          <input type="text" name="prenom" placeholder="Prénom"  onChange={this.getUserName} />
+          <input type="password" name="password"  placeholder="Password"  onChange={this.getPassword} />
         </div>
       )
     }
     return render
   }
 
-  checkLogginInfo=()=>{
-    let logginInfo = true;
-    if(logginInfo) this.props.setLoggedUser();
+  checkLogginInfo = (array, name, password) => {
+    let users = array.map(name => name.firstName)
+    let passwords = array.map(password => password.password)
+    console.log(name, password)
+    for (let i = 0; i < users.length; i++) {
+      if (name === users[i] && password !== passwords[i]) {
+        alert("Mot de passe érroné")
+      }
+      if (name === users[i] && password === passwords[i]) {
+        this.props.setLoggedUser(true)
+      }       
+    }
   }
 
   render() {
+    
     return (
       <div id="userInfo">
         
         <div>{this.renderNewUserInfo()}</div>
         <div id="buttonRow">
-          <button onClick={this.checkLogginInfo}>OK</button>
+          <button onClick={()=>this.checkLogginInfo(this.props.giversArray, this.state.userName, this.state.password)}>OK</button>
           <button onClick={this.setNewUser}>New user</button>
         </div>
       </div>

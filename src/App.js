@@ -5,7 +5,7 @@ import HomePage from './pages/HomePage';
 import Receiver from './pages/Receiver';
 import Giver from './pages/Giver';
 import MapContainer from './Components/Map';
-import GiverModel from './Models/GiverModel'
+import GiverModel from './Models/GiverModel';
 
 
 class App extends Component {
@@ -117,7 +117,7 @@ class App extends Component {
             <BrowserRouter>
               <Switch>
                 <Route exact path="/" render={()=><HomePage/>}/>
-                <Route exact path="/giver" onClick={this.setUserStatus("giver")} render={()=><Giver userStatus = {this.userStatus}/>}/>
+                <Route exact path="/giver" onClick={this.setUserStatus("giver")} render={()=><Giver userStatus = {this.userStatus} giversArray={this.giversArray}/>}/>
                 <Route 
                   exact path="/receiver" 
                   onClick={this.setUserStatus("receiver")} 

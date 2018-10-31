@@ -12,9 +12,9 @@ class Giver extends Component {
     }
   }
 
-  setLoggedUser=()=>{
+  setLoggedUser=(bool)=>{
     this.setState({
-      loggedUser: true,
+      loggedUser: bool,
     })
   }
 
@@ -31,6 +31,8 @@ class Giver extends Component {
         <Login 
           userStatus = {this.props.userStatus}
           setLoggedUser = {this.setLoggedUser}
+          giversArray={this.props.giversArray}
+          setLoggedUser={this.setLoggedUser}
         />
       }</div>
        </div>
