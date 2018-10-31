@@ -1,0 +1,21 @@
+select {
+  margin: 20px;
+  font-size: 25px;
+}
+
+button {
+  margin: 20px;
+  font-size: 25px;
+  border-radius: 10px;
+}
+
+td {
+  border: 1px solid #dddddd;
+  min-width: 100px; 
+  text-align: left;
+  padding: 8px;
+}
+
+.candyTable {
+  margin-left: 50vh;
+}
