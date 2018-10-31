@@ -61,11 +61,17 @@ class Login extends Component {
       render.push(
         <div>
           <input type="text" name="prenom" placeholder="Prénom"  onChange={this.getUserName} />
-          <input type="password" name="password"  placeholder="Password"  onChange={this.getPassword} />
+          <input type="password" name="password"  placeholder="Password"  onChange={this.getPassword} onKeyPress={this.enterPassword} />
         </div>
       )
     }
-    return render
+    return render 
+  }
+
+  enterPassword = (e) => {
+    if (e.key === 'Enter') {
+      this.checkLogginInfo(this.props.giversArray, this.state.userName, this.state.password)
+    }
   }
 
   checkLogginInfo = (array, name, password) => {
