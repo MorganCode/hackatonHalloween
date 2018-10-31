@@ -29,8 +29,27 @@ class Login extends Component {
   }
 
   renderNewUserInfo=()=>{
+    console.log(this.props.userStatus == "receiver")
     let render=[]
-    if(this.state.newUser){
+    
+    
+    if(this.state.newUser && this.props.userStatus == "receiver"){
+      render.push(
+        <div>
+          <input type="text" name="prenom" placeholder="Prénom"/>
+          <input type="password" name="password"  placeholder="Password"/>
+          <input type="password" name="passwordConfirm" placeholder="Confirm password"/>
+          <input type="text" name="streetNumber" placeholder="N° de rue"/>
+          <input type="text" name="streetType" placeholder="Type de rue"/>
+          <input type="text" name="streetName" placeholder="Nom de rue"/>
+          <input type="text" name="postalCode" placeholder="Code postal"/>
+          <input type="text" name="city" placeholder="Ville"/>
+          <input type="text-area" name="extra-info" placeholder="Autres informations (n° appartement, digicode...)"/>
+        </div>
+      )
+    }
+    
+    else if(this.state.newUser){
       render.push(
         <div>
           <input type="text" name="prenom" placeholder="Prénom"/>
@@ -38,32 +57,13 @@ class Login extends Component {
           <input type="password" name="passwordConfirm" placeholder="Confirm password"/>
         </div>
       )
-    
-      if(this.props.userStatus === "receiver"){
-        let render = []
-        render.push(
-          <div>
-            <input type="text" name="prenom" placeholder="Prénom"/>
-            <input type="password" name="password"  placeholder="Password"/>
-            <input type="password" name="passwordConfirm" placeholder="Confirm password"/>)
-            <fieldset>
-              <legend>Adresse</legend>
-              <input type="text" name="streetNumber" placeholder="N° de rue"/>
-              <input type="text" name="streetType" placeholder="Type de rue"/>
-              <input type="text" name="streetName" placeholder="Nom de rue"/>
-              <input type="text" name="postalCode" placeholder="Code postal"/>
-              <input type="text" name="city" placeholder="Ville"/>
-              <input type="text-area" name="extra-info" placeholder="Autres informations (n° appartement, digicode...)"/>
-            </fieldset>
-          </div>
-        )
-      }
     }
+
     else{
       render.push(
         <div>
           <input type="text" name="prenom" placeholder="Prénom"  onChange={this.getUserName} />
-          <input type="password" name="password"  placeholder="Password"  onChange={this.getPassword} /*onKeyPress={this.enterPassword}*/ />
+          <input type="password" name="password"  placeholder="Password"  onChange={this.getPassword} />
         </div>
       )
     }

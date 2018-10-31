@@ -19,20 +19,20 @@ class App extends Component {
       email: 'jeandupont@voila.fr',
       avatar: 'citrouille.jpeg',
       adress: {
-        streetNumber: 22,
-        streetType: 'avenue',
-        streetName: 'Saxe-Gambetta',
-        postalCode: 69007,
+        streetNumber: 29,
+        streetType: 'rue',
+        streetName: 'de Condé',
+        postalCode: 69002,
         cityName: 'Lyon',
         aptmtNumber: '',
       },
       candy: {
-        coca: true,
+        coca: false,
         carambar:false,
         croco: false,
         schtroumpfs:false,
         sucette:false,
-        dragibus: false,
+        dragibus: true,
       },
       hasCandy: true,
       finalNotation: 0,
@@ -46,7 +46,7 @@ class App extends Component {
       id: 1,
       firstName: 'Martin',
       lastName: 'Durand',
-      password: 'MartinDurand',
+      password: 'password',
       email: 'martindurand@voila.fr',
       avatar: 'citrouille.jpeg',
       adress: {
@@ -58,9 +58,9 @@ class App extends Component {
         aptmtNumber: '',
       },
       candy: {
-        coca: false,
+        coca: true,
         carambar:true,
-        croco: false,
+        croco: true,
         schtroumpfs:false,
         sucette:false,
         dragibus: false,
@@ -80,17 +80,17 @@ class App extends Component {
       email: 'paulmachin@voila.fr',
       avatar: 'citrouille.jpeg',
       adress: {
-        streetNumber: 22,
-        streetType: 'rue',
-        streetName: 'Pasteur',
-        postalCode: 69007,
+        streetNumber: 48,
+        streetType: 'cours',
+        streetName: 'Suchet',
+        postalCode: 69002,
         cityName: 'Lyon',
         aptmtNumber: '',
       },
       candy: {
         coca: false,
-        carambar:true,
-        croco: true,
+        carambar:false,
+        croco: false,
         schtroumpfs:true,
         sucette:false,
         dragibus: false,
@@ -102,7 +102,37 @@ class App extends Component {
     };
     this.giverPaulMachin = new GiverModel(PaulMachinInfo)
 
-    this.giversArray = [this.giverJeanDupont, this.giverMartinDurand, this.giverPaulMachin]
+    let LouisPierreInfo = {
+      id: 3,
+      firstName: 'Louis',
+      lastName: 'Pierre',
+      password: 'password',
+      email: 'paulmachin@voila.fr',
+      avatar: 'citrouille.jpeg',
+      adress: {
+        streetNumber: 38,
+        streetType: 'cours',
+        streetName: 'Emile Zola',
+        postalCode: 69100,
+        cityName: 'Villeurbanne',
+        aptmtNumber: '',
+      },
+      candy: {
+        coca: false,
+        carambar:false,
+        croco: false,
+        schtroumpfs:true,
+        sucette:false,
+        dragibus: false,
+      },
+      hasCandy: true,
+      finalNotation: 0,
+      notation: [],
+      available: true,
+    };
+    this.giverLouisPierre = new GiverModel(LouisPierreInfo)
+
+    this.giversArray = [this.giverJeanDupont, this.giverMartinDurand, this.giverPaulMachin, this.giverLouisPierre]
 
     this.userStatus = ""
     console.log("in app", this.giversArray)

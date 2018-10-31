@@ -12,14 +12,14 @@ class ProfileGiver extends Component {
     
     let infoJeanDupont = {
       id: 0,
-      firstName: 'Jean',
-      lastName: 'Dupont',
+      firstName: 'Martin',
+      lastName: 'Durand',
       password: 'password',
       email: 'jeandupont@voila.fr',
       avatar: 'http://image.noelshack.com/fichiers/2018/44/3/1540979367-profilemen.png',
 
       adress: {
-        streetNumber: 17,
+        streetNumber: 20,
         streetType: 'rue',
         streetName: 'Delandine',
         postalCode: '69002',
@@ -44,8 +44,8 @@ class ProfileGiver extends Component {
     this.GiverJeanDupont = new GiverModel(infoJeanDupont)
 
     this.state = {
-      available: false,
-      showAvailable: 'Absent',
+      available: true,
+      showAvailable: 'Disponible',
     };
 
   }
