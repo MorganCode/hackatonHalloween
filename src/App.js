@@ -105,6 +105,7 @@ class App extends Component {
     this.giversArray = [this.giverJeanDupont, this.giverMartinDurand, this.giverPaulMachin]
 
     this.userStatus = ""
+    console.log("in app", this.giversArray)
   }
 
   setUserStatus = (status) => {
@@ -118,22 +119,36 @@ class App extends Component {
 
   render() {
 
+    console.log("in app render", this.giversArray)
 
     return (
       <div className="App">
         <BrowserRouter>
           <Switch>
             <Route exact path="/" render={() => <HomePage />} />
-            <Route exact path="/giver" onClick={this.setUserStatus("giver")} render={() => <Giver userStatus={this.userStatus} />} />
+            <Route 
+              exact path="/giver" 
+              onClick={this.setUserStatus("giver")} 
+              render={() => 
+                <Giver 
+                  userStatus={this.userStatus} 
+                  giversArray={this.giversArray} 
+                />
+              } 
+            />
             <Route
               exact path="/receiver"
               onClick={this.setUserStatus("receiver")}
               render={
-                () => <Receiver
+                () => 
+                {
+                console.log("route", this.giversArray)
+                return <Receiver
                   giversArray={this.giversArray}
                   userStatus={this.userStatus}
                   setNotation={this.setNotation}
                 />
+                }
               }
             />
           </Switch>

@@ -6,19 +6,22 @@ import Login from '../Components/Login'
 
 class Giver extends Component {
   constructor(props){
+    
     super(props)
     this.state={
       loggedUser:false,
     }
+    console.log("in giver constructor", this.props.giversArray)
   }
 
-  setLoggedUser=()=>{
+  setLoggedUser=(bool)=>{
     this.setState({
-      loggedUser: true,
+      loggedUser: bool,
     })
   }
 
   render() {
+    console.log("in giver render", this.props.giversArray)
     return (
       <div>
         <div>{
@@ -31,6 +34,8 @@ class Giver extends Component {
           <Login 
             userStatus = {this.props.userStatus}
             setLoggedUser = {this.setLoggedUser}
+            giversArray={this.props.giversArray}
+            setLoggedUser={this.setLoggedUser}
           />
         }</div>
       </div>
