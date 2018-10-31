@@ -90,7 +90,7 @@ class App extends Component {
       hasCandy : true,
       finalNotation : 0,
       notation : [],
-      available : false,
+      available : true,
     };
     this.giverPaulMachin = new GiverModel(PaulMachinInfo)
 

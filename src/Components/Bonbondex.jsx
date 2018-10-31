@@ -97,9 +97,8 @@ class Bonbondex extends Component {
 
   checkDistance=(selection)=>{
     for(let i=0;i<this.props.giversArray.length;i++){
-      console.log(this.calculateDistance(this.state.userPosition, this.props.giversArray[i]))
-      console.log(this.props.giversArray[i].candy[selection])
-      if(this.calculateDistance(this.state.userPosition, this.props.giversArray[i])<50 && this.props.giversArray[i].candy[selection]){
+      console.log(this.props.giversArray[i])
+      if(this.calculateDistance(this.state.userPosition, this.props.giversArray[i])<50 && this.props.giversArray[i].candy[selection] && this.props.giversArray[i].available){
         return true
       }
     }
@@ -123,6 +122,8 @@ class Bonbondex extends Component {
 
   calculateDistance=(user, house)=>{
     let localhouse={lat: 45.754672, lng: 4.841614}
+    
+    //let localhouse={lat: 45.743031, lng: 4.835072}
     let localuser={lat: 45.754880, lng: 4.841205}
 
     const R = 6371e3; // metres
